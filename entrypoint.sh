@@ -11,9 +11,9 @@ ZK_IPs=","
 
 my_stack=$(curl -s rancher-metadata.rancher.internal/2015-12-19/self/stack/name)
 
-for i in $(curl -s rancher-metadata.rancher.internal/2015-12-19/stacks/${my_stack}/services/zookeeper/containers/ | awk -F= '{print $2}')
+for i in $(curl -s rancher-metadata.rancher.internal/2015-12-19/services/zookeeper/containers/ | awk -F= '{print $2}')
 do
-        ZK_IPs="${ZK_IPs},$(curl -s rancher-metadata.rancher.internal/2015-12-19/stacks/${my_stack}/services/zookeeper/containers/${i}/primary_ip):2181"
+        ZK_IPs="${ZK_IPs},$(curl -s rancher-metadata.rancher.internal/2015-12-19/services/zookeeper/containers/${i}/primary_ip):2181"
 done
 ZK_IPs=$(echo $ZK_IPs | sed 's/,,//g')
 
